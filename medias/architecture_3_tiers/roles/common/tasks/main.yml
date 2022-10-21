@@ -1,0 +1,24 @@
+- name: Install common deps
+  ansible.builtin.apt:
+    name: ["vim", "zsh"]
+    update_cache: true
+  become: true
+- name: Include user tasks
+  ansible.builtin.include_tasks: users.yml
+  loop: "{{ users }}"
+# - name: Give users access to multiple databases
+#   ansible.builtin.debug:
+#     msg: "{{ item }} {{ item[0] }} / {{ item[1] }}.*:ALL / {{ item[2] }} / {{ item[3] }}"
+#   with_nested:
+#     - ['alice', 'bob']
+#     - ['clientdb', 'employeedb', 'providerdb']
+# - name: Demo prompt
+#   ansible.builtin.debug:
+#     msg: "git checkout {{ tag_version }}"
+# - name: Password leak
+#   ansible.builtin.debug:
+#     var: item
+#   loop:
+#     - "{{ password_riri }}"
+#     - "{{ password_fifi }}"
+#     - "{{ password_loulou }}"

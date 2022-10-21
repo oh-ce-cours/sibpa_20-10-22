@@ -1,0 +1,20 @@
+---
+- hosts: all
+  name: Install common
+  gather_facts: true
+  vars:
+    users:
+      - name: "riri"
+        password: "{{ password_riri }}"
+      - {name: "fifi", password: "{{ password_fifi }}"}
+      - {name: "loulou", password: "{{ password_loulou }}"}
+    groups:
+      - riri
+      - fifi
+      - loulou
+  vars_prompt:
+    - name: tag_version
+      private: false
+      prompt: "Quelle version on déploie chef ?"
+  roles:
+    - common

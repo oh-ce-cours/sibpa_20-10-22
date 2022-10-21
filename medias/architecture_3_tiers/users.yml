@@ -1,0 +1,23 @@
+- name: Create user
+  become: true
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    groups:
+      - sudo
+    append: true
+    password: "{{ item.password | password_hash('sha512', 'mysecretsalt') }}"
+    shell: /bin/zsh
+  no_log: true
+- name: Copy zshrc
+  become: true
+  no_log: true
+  ansible.builtin.template:
+    src: zshrc_a_copier.txt
+    dest: "~{{ item.name }}/.zshrc"
+    owner: "{{ item.name }}"
+    group: "{{ item.name }}"
+    mode: 0644
+- name: Show password
+  ansible.builtin.debug:
+    var: item
+  no_log: true

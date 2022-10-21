@@ -1,0 +1,17 @@
+---
+- gather_facts: true
+  name: Mon play
+  hosts: all
+  tasks:
+    - name: Install base packages
+      become: true
+      ansible.builtin.apt:
+        name:
+          - iptables-persistent
+          - fail2ban
+        state: present
+        update_cache: true
+      # when: ansible_distribution == "Debian"
+    - name: Debug
+      ansible.builtin.debug:
+        var: ansible_facts.memory_mb.real.free

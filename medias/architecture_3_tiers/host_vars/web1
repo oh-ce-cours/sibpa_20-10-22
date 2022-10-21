@@ -1,0 +1,4 @@
+hello: "Salut, je suis sur web1"
+git_config:
+    url: "github.com/toto"
+    branch: web

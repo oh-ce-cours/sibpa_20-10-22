@@ -1,0 +1,4 @@
+hello: "Yo, on est sur DB1"
+git_config:
+    url: "github.com/toto"
+    branch: db
